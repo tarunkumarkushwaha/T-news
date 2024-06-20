@@ -25,9 +25,9 @@ const newsSlice = createSlice({
         state.favouriteData.push(action.payload.datas);
         localStorage.setItem("article", JSON.stringify(state.favouriteData))
       } else {
-        console.log("delete")
-        const dataToDelete = action.payload;
-        state.favouriteData = state.favouriteData.filter(item => item !== dataToDelete);
+        // console.log("delete")
+        const dataToDelete = action.payload.datas;
+        state.favouriteData = state.favouriteData.filter(item => item.title !== dataToDelete.title);
         localStorage.setItem("article", JSON.stringify(state.favouriteData))
       }
     },

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import SideBar from './SideBar'
-import { useNavigate, useLocation} from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { setfavouriteData } from "../store/slices/newsSlice";
 
 const NewsView = () => {
   const [favourite, setfavourite] = useState(false)
-  const navigate = useNavigate()
   const location = useLocation();
   const { newsData, favouriteData } = useSelector((state) => state.news);
   const dispatch = useDispatch();
