@@ -5,10 +5,11 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
 import Error from './components/Error.jsx'
-import Login from './components/Login.jsx'
-import Signup from './components/Signup.jsx'
 import UserContextProvider from './components/UserContextProvider.jsx'
 import NewsView from './components/NewsView.jsx'
+import store from './store/index.js'
+import { Provider } from 'react-redux'
+import FavouriteArticles from './FavouriteArticles.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,20 +18,14 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: '/login',
-    element: <Login/>,
-    errorElement: <Error />,
-  }
-  ,
-  {
-    path: '/signup',
-    element: <Signup/>,
+    path: '/favourite',
+    element: <FavouriteArticles/>,
     errorElement: <Error />,
   }
   ,
   {
     path: '/:article',
-    element: <NewsView/>,
+    element: <NewsView />,
     errorElement: <Error />,
   }
 ])
@@ -38,7 +33,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserContextProvider>
-    <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </UserContextProvider>
   </React.StrictMode>,
 )
