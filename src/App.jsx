@@ -22,12 +22,12 @@ function App() {
       <div className={`flex flex-row justify-between transition-all duration-1000 ease-in-out`}>
         <section className="flex flex-col justify-center items-center p-1">
           <div className="flex flex-row flex-wrap justify-center items-center">
-            {newsData ? <> {newsData.map((item, index) => {
+            {newsData.length > 1 ? <> {newsData.map((item, index) => {
               return <Card key={index} data={item} />
             })}
             </>
               :
-              <div className="flex justify-center items-center p-40">Please Wait...</div>
+              <div className="flex justify-center text-xl font-medium items-center w-[100vw] p-40">Please Wait...</div>
             }
           </div>
         </section>

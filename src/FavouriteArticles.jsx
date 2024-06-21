@@ -24,7 +24,7 @@ const FavouriteArticles = () => {
             })}
             </>
               :
-              <div className="flex justify-center items-center p-32">Please Wait...</div>
+              <div className="flex justify-center text-xl font-medium items-center w-[100vw] p-40">Please Wait...</div>
             }
           </div>
         </section>

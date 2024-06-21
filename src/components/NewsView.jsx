@@ -21,8 +21,8 @@ const NewsView = () => {
     );
   };
 
-  let data = searchString && newsData && searchArticles(newsData, searchString)[0]
-  // console.log(data,favouriteData)
+  let data = searchString && newsData && searchArticles(newsData, searchString)[0] || searchArticles(favouriteData, searchString)[0]
+  // console.log(favouriteData,data)
 
   const favouriteSetter = () => {
     if (!favourite) {
@@ -35,9 +35,9 @@ const NewsView = () => {
   }
 
   useEffect(() => {
-    if (favouriteData.some(item => item.title == data.title)) {
-      setfavourite(true)
-    }
+    // if (favouriteData.some(item => item.title == data.title)) {
+    //   setfavourite(true)
+    // }
   }, [])
 
   return (
