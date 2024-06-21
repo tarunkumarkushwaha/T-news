@@ -3,16 +3,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
 import Logo from '../assets/Logo.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { setQuery, fetchNewsData, setSidebar } from "../store/slices/newsSlice";
+import { setQuery, setSidebar } from "../store/slices/newsSlice";
 
 const SideBar = () => {
-    const { query, sidebar } = useSelector((state) => state.news);
+    const { sidebar } = useSelector((state) => state.news);
     const dispatch = useDispatch();
-
-
-    useEffect(() => {
-        dispatch(fetchNewsData(query));
-    }, [query, dispatch]);
 
     let navigate = useNavigate()
 

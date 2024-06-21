@@ -1,27 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import SideBar from "./components/SideBar";
 import Navbar from "./components/Navbar";
 import Card from "./components/Card";
 import RefreshIcon from '@mui/icons-material/Refresh';
-// import { ToastContainer } from "react-toastify/dist/index.js";
 import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from 'react-redux';
-import { setQuery, setSidebar, fetchNewsData } from "./store/slices/newsSlice";
+import { setQuery, setSidebar, fetchNewsData, setIsInitialLoad } from "./store/slices/newsSlice";
 
 function App() {
-  const { newsData, query, sidebar } = useSelector((state) => state.news);
+  const { newsData, query, sidebar, isInitialLoad } = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNewsData(query));
-  }, [query, dispatch]);
+    if (isInitialLoad || query) {
+      dispatch(fetchNewsData(query));
+    }
+    dispatch(setIsInitialLoad(false))
+  }, [query]);
 
   return (
     <>
       <Navbar />
       <div className={`flex flex-row justify-between transition-all duration-1000 ease-in-out`}>
         <SideBar sidebar={sidebar} setsidebar={setSidebar} setQuery={setQuery} />
-        <section className="absolute flex flex-col justify-center items-center p-1">
+        <section className="flex flex-col justify-center items-center p-1">
           <div className="flex flex-row flex-wrap justify-center items-center">
             {newsData ? <> {newsData.map((item, index) => {
               return <Card key={index} data={item} />

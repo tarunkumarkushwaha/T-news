@@ -8,6 +8,7 @@ let storedFavourite = localStorage.getItem("article")
 export const fetchNewsData = createAsyncThunk('news/fetchNewsData', async (query) => {
   const response = await fetch(`https://newsapi.org/v2/${query}&apiKey=${API_KEY}`);
   const data = await response.json();
+  // console.log("api request made")
   return data.articles.map(article => ({ ...article, favourite: false }));
 });
 
@@ -18,6 +19,7 @@ const newsSlice = createSlice({
     favouriteData: storedFavourite ? [...JSON.parse(storedFavourite)] : [],
     query: 'top-headlines?country=in',
     sidebar: false,
+    isInitialLoad: true,
   },
   reducers: {
     setfavouriteData: (state, action) => {
@@ -37,6 +39,9 @@ const newsSlice = createSlice({
     setSidebar: (state, action) => {
       state.sidebar = action.payload;
     },
+    setIsInitialLoad: (state, action) => {
+      state.isInitialLoad = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,5 +54,5 @@ const newsSlice = createSlice({
   },
 });
 
-export const { setQuery, setSidebar, favouriteData, setfavouriteData } = newsSlice.actions;
+export const { setQuery, setSidebar, setfavouriteData, setIsInitialLoad } = newsSlice.actions;
 export default newsSlice.reducer;

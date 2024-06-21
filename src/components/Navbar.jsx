@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../assets/Logo.svg'
 import { NavLink, useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,6 +14,25 @@ const Navbar = () => {
     const toggleNav = function () {
         dispatch(setSidebar(!sidebar))
     }
+
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return (...args) => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+          timeoutId = setTimeout(() => {
+            func(...args);
+          }, delay);
+        };
+      };
+
+    const querySetter = (e) => {
+        let value = e.target.value.toLowerCase()
+        if (value !== "") {      
+            debounce(dispatch(setQuery("everything?q=" + value)),500)
+        }
+    }
     return (
         <>
             <header className='bg-slate-700 h-20 px-10 flex flex-row justify-between items-center'>
@@ -28,7 +47,7 @@ const Navbar = () => {
 
                     <input
                         className='bg-slate-700 text-slate-100 outline-none'
-                        onChange={(e) => dispatch(setQuery("everything?q=" + e.target.value.toLowerCase()))}
+                        onChange={querySetter}
                         type="text"
                         placeholder="Search for news..."
                     />

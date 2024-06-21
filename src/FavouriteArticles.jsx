@@ -16,10 +16,10 @@ const FavouriteArticles = () => {
       <Navbar />
       <div className={`flex flex-row justify-between transition-all duration-1000 ease-in-out`}>
         <SideBar sidebar={sidebar} setsidebar={setSidebar} setQuery={setQuery} />
-        <button onClick={() => navigate("/")} className="p-2 mx-12 my-4 text-white px-2 bg-blue-300 rounded-lg btn">
+        <button onClick={() => navigate("/")} className="p-2 h-10 mx-12 my-4 text-white px-2 bg-blue-300 rounded-lg btn">
           back
         </button>
-        <section className="absolute flex flex-col justify-center items-center p-1">
+        <section className=" flex flex-col justify-center items-center p-1">
           <div className="flex flex-row flex-wrap justify-center items-center">
             {favouriteData ? <> {favouriteData.map((item, index) => {
               return <Card key={index} data={item} />

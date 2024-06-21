@@ -40,8 +40,6 @@ const NewsView = () => {
     }
   }, [])
 
-
-
   return (
     <>
       <div>
