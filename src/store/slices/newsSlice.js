@@ -18,7 +18,6 @@ const newsSlice = createSlice({
     newsData: [],
     favouriteData: storedFavourite ? [...JSON.parse(storedFavourite)] : [],
     query: 'top-headlines?country=in',
-    sidebar: false,
     isInitialLoad: true,
   },
   reducers: {
@@ -36,9 +35,6 @@ const newsSlice = createSlice({
     setQuery: (state, action) => {
       state.query = action.payload;
     },
-    setSidebar: (state, action) => {
-      state.sidebar = action.payload;
-    },
     setIsInitialLoad: (state, action) => {
       state.isInitialLoad = action.payload;
     },
@@ -54,5 +50,5 @@ const newsSlice = createSlice({
   },
 });
 
-export const { setQuery, setSidebar, setfavouriteData, setIsInitialLoad } = newsSlice.actions;
+export const { setQuery, setfavouriteData, setIsInitialLoad } = newsSlice.actions;
 export default newsSlice.reducer;

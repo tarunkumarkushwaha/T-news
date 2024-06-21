@@ -5,7 +5,6 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import "react-toastify/dist/ReactToastify.css";
 import Error from './components/Error.jsx'
-import UserContextProvider from './components/UserContextProvider.jsx'
 import NewsView from './components/NewsView.jsx'
 import store from './store/index.js'
 import { Provider } from 'react-redux'
@@ -32,10 +31,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserContextProvider>
       <Provider store={store}>
         <RouterProvider router={router} />
       </Provider>
-    </UserContextProvider>
   </React.StrictMode>,
 )

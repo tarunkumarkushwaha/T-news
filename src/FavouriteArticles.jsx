@@ -1,33 +1,30 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SideBar from "./components/SideBar";
 import Navbar from "./components/Navbar";
 import Card from "./components/Card";
-import { useDispatch, useSelector } from 'react-redux';
-import { setQuery, setSidebar, setfavouriteData } from "./store/slices/newsSlice";
+import { useSelector } from 'react-redux';
+import { setQuery} from "./store/slices/newsSlice";
 import { useNavigate } from 'react-router-dom';
 
 const FavouriteArticles = () => {
   const navigate = useNavigate()
-  const { favouriteData, sidebar } = useSelector((state) => state.news);
-  const dispatch = useDispatch();
+  const { favouriteData} = useSelector((state) => state.news);
 
   return (
     <>
       <Navbar />
-      <div className={`flex flex-row justify-between transition-all duration-1000 ease-in-out`}>
-        <SideBar sidebar={sidebar} setsidebar={setSidebar} setQuery={setQuery} />
-        <button onClick={() => navigate("/")} className="p-2 h-10 mx-12 my-4 text-white px-2 bg-blue-300 rounded-lg btn">
+      <div className={`flex flex-col`}>
+        <button onClick={() => navigate("/")} className="p-2 h-10 w-16 mx-12 my-4 text-white px-2 bg-blue-300 rounded-lg btn">
           back
         </button>
-        <section className=" flex flex-col justify-center items-center p-1">
+        <section className="p-5">
           <div className="flex flex-row flex-wrap justify-center items-center">
             {favouriteData ? <> {favouriteData.map((item, index) => {
               return <Card key={index} data={item} />
             })}
-
             </>
               :
-              <div className="flex justify-center items-center mx-auto"><RefreshIcon /></div>
+              <div className="flex justify-center items-center p-32">Please Wait...</div>
             }
           </div>
         </section>
