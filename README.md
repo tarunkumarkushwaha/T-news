@@ -1,9 +1,24 @@
+Welcome to T-news
 
-1. dummy data is added only to view in hosted site as free api does not support data fetching on production deployment in this case some functionality will not work.
+new destination for news
 
-2. new posts can be added along with data fetched from api
+Features 
+1. article in detailed view
+2. responsive design tailwind
+3. category filtering in sidebar
+4. ui updates to change
+5. pagination
+6. state management through redux tool kit
+7. feature add favourite
+8. search bar with debounce to limit api request
 
-3. `IMPORTANT` - To run app and see all features
+`IMPORTANT` note---
+
+1. free newsapi works only with local system and does not support data fetching on production deployment so there will be blank response in production url.
+
+To run app and see all features
 a. clone repo
 b. npm i
 c. and run simply by `npm run dev`
+
+any suggestions contact me.
