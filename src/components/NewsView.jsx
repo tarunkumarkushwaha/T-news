@@ -4,6 +4,8 @@ import SideBar from './SideBar'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { setfavouriteData } from "../store/slices/newsSlice";
+import { ToastContainer } from "react-toastify";
+import { toast } from 'react-toastify';
 
 const NewsView = () => {
   const [favourite, setfavourite] = useState(false)
@@ -21,23 +23,27 @@ const NewsView = () => {
     );
   };
 
-  let data = searchString && newsData && searchArticles(newsData, searchString)[0] || searchArticles(favouriteData, searchString)[0]
+  let mergeData = [...newsData,...favouriteData]
+
+  let data = searchString && newsData && searchArticles(mergeData, searchString)[0] || searchArticles(favouriteData, searchString)[0]
   // console.log(favouriteData,data)
 
   const favouriteSetter = () => {
     if (!favourite) {
       dispatch(setfavouriteData({ operation: "append", datas: data }))
       setfavourite(!favourite)
+      toast.success("added to favourite")
     } else {
       dispatch(setfavouriteData({ operation: "delete", datas: data }))
       setfavourite(!favourite)
+      toast.success("removed from favourites")
     }
   }
 
   useEffect(() => {
-    // if (favouriteData.some(item => item.title == data.title)) {
-    //   setfavourite(true)
-    // }
+    if (favouriteData.some(item => item.title == data.title)) {
+      setfavourite(true)
+    }
   }, [])
 
   return (
@@ -65,6 +71,18 @@ const NewsView = () => {
           <p className='text-xl font-medium p-20'>article not available</p>
         </div>}
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+      />
     </>
   )
 }
